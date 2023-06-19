@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body>
+    <header style = "background-color: rgba(255,255,255,0.8); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;"class="d-flex flex-wrap justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <img src="https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe.png" loading="lazy" sizes="(max-width: 479px) 33vw, 166.484375px" srcset="https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe-p-500.png 500w, https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe-p-800.png 800w, https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe-p-1080.png 1080w, https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe-p-1600.png 1600w, https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/64717a7b6194e83c487f111d_Isizwe.png 1918w" alt="" class="logo" style = "margin-left: 2%;">
+      </nav>
+    </header>
+    <div class = "page_cont">
+        <div class="container">
+            <div class="control-reg">
+                <button class="button" id="single">Single</button>
+                <button class="button" id="circle">Circle</button>
+                <button class="button1" id="day">1 day</button>
+                <button class="button1" id="week">1 week</button>
+                <button class="button1" id="month">1 month</button>
+                <div class="gauge">
+                    <div class="gauge__body">
+                        <div class="gauge__fill"></div>
+                        <div class="gauge__cover"></div>
+                        <input class="alternate__slider" id="alternate__slider" type="range" min="0" max="1440" value="0">
+                    </div>
+               </div>
+                <button class="connect" id="connect">Connect for Single</button>
+            </div>
+        </div>
+        <div class="container3">
+            <h3 style="color: white;">Connecting the next billion</h3>
+            <h6 style="color: white;">Everyone in the world should have fast reliable affordable internet</h6>
+            <button class="button2" id="randButton">do something</button>
+            <button class="button2" id="randButton">do something else</button>
+            <img style = "width: 80%;" src="https://uploads-ssl.webflow.com/646f31938f2a6eda2f88a9b9/6474db52f522e723a632328b_iszwe-hero.webp" alt="">
+        </div>
+    </div>
+    <script>
+        var day = document.getElementById("day");
+        var week = document.getElementById("week");
+        var month = document.getElementById("month");
+        var single = document.getElementById("single");
+        var circle = document.getElementById("circle");
+        const gaugeElement = document.querySelector(".gauge");
+        const slider = document.getElementById("alternate__slider");
+        gaugeElement.querySelector(".gauge__cover").textContent = slider.value;
+
+        day.onclick = function() {
+            setGaugeValue(gaugeElement, 0);
+            gaugeElement.querySelector(".gauge__cover").textContent = "1 day of Internet 384 VC"
+            slider.value = 0;
+        }
+        week.onclick = function() {
+            setGaugeValue(gaugeElement, 0);
+            gaugeElement.querySelector(".gauge__cover").textContent = "1 week of Internet 2880 VC"
+            slider.value = 0;
+        }
+        month.onclick = function() {
+            setGaugeValue(gaugeElement, 0);
+            gaugeElement.querySelector(".gauge__cover").textContent = "1 month of Internet 9600 VC"
+            slider.value = 0;
+        }
+
+
+        slider.oninput = function() {
+            gaugeElement.querySelector(".gauge__cover").textContent = gaugeElement.querySelector(".gauge__cover").textContent;
+            var hours = Math.floor(this.value / 60);          
+            var minutes = this.value % 60;
+
+            setGaugeValue(gaugeElement, (this.value)/1440);
+
+            var output_string = "";
+
+            if (hours != 0) {
+                output_string += hours + " hours ";
+            }
+            if (minutes != 0) {
+                if (hours != 0) {
+                    output_string += " "
+                    //output_string += " and "
+                }
+                output_string += minutes + " minutes";
+            }
+            if ((minutes == 0) & (hours == 0)) {
+                output_string = "Please select package";
+            } if (hours == 24) {
+                output_string = "1 day of Internet 384 VC"
+            } else if ((minutes != 0) & (hours != 0) & (hours != 24)) {
+                output_string += " " + Math.round(this.value * 0.333) + " VC"
+            }
+
+            gaugeElement.querySelector(".gauge__cover").textContent = output_string;
+        }
+
+        single.onclick = function() {
+            document.getElementById("connect").innerHTML = "Connect for Single";
+            document.body.style = "background-image: url(../imgs/yellow-wallpaper-v3.jpg);"
+        }
+
+        circle.onclick = function() {
+            document.getElementById("connect").innerHTML = "Connect for Circle";
+            document.body.style = "background-image: url(../imgs/blue-wallpaper-v3.jpg);"
+        }
+
+        function setGaugeValue(gauge, value) {
+            if (value < 0 || value > 1) {
+                return;
+            }
+
+            gauge.querySelector(".gauge__fill").style.transform = `rotate(${value / 2}turn)`;
+            //gauge.querySelector(".gauge__cover").textContent = `${Math.round(value * 480)} VC`; 
+            gauge.querySelector(".gauge__cover").textContent = `please select package`;
+        }
+
+        setGaugeValue(gaugeElement, 0);
+    </script>
+</body>
+</html>
