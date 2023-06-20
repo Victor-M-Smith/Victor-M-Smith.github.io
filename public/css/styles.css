@@ -241,7 +241,7 @@ body {
 }
 
 .popup img {
-    width: 100px;
+    width: 20%;
     margin-top: -50px;
     border-radius: 50%;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
