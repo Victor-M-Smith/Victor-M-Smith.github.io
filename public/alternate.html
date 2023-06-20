@@ -29,9 +29,17 @@
                         <input class="alternate__slider" id="alternate__slider" type="range" min="0" max="1440" value="0">
                     </div>
                </div>
-                <button class="connect" id="connect">Connect for Single</button>
+                <button class="connect" id="connect" onclick="openPopup()">Connect for Single</button>
             </div>
         </div>
+
+        <div class="popup" id="popup">
+            <img src="../public/imgs/Tick.png" alt="">
+            <h2>Thank You!</h2>
+            <p>Your purchase was sucessful.</p>
+            <button type="button" onclick="closePopup()">OK</button>
+        </div>
+
         <div class="container3">
             <h3 style="color: white;">Connecting the next billion</h3>
             <h6 style="color: white;">Everyone in the world should have fast reliable affordable internet</h6>
@@ -49,6 +57,15 @@
         const gaugeElement = document.querySelector(".gauge");
         const slider = document.getElementById("alternate__slider");
         gaugeElement.querySelector(".gauge__cover").textContent = slider.value;
+
+        let popup = document.getElementById("popup");
+
+        function openPopup() {
+            popup.classList.add("open-popup");
+        }
+        function closePopup() {
+            popup.classList.remove("open-popup");
+        }
 
         day.onclick = function() {
             setGaugeValue(gaugeElement, 0);

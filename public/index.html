@@ -24,9 +24,17 @@
                 <button class="button1" id="month">1 month</button>
                 <div class="value" id="output_value">Please select package</div>
                 <input class="slider" id="my_slider" type="range" min="0" max="1440" value="0">
-                <button class="button2" id="connect">Connect for Single</button>
+                <button class="connect" id="connect" onclick="openPopup()">Connect for Single</button>
             </div>
         </div>
+
+        <div class="popup" id="popup">
+            <img src="../public/imgs/Tick.png" alt="">
+            <h2>Thank You!</h2>
+            <p>Your purchase was sucessful.</p>
+            <button type="button" onclick="closePopup()">OK</button>
+        </div>
+
         <div class="container2">
             <h3 style="color: white;">Connecting the next billion</h3>
             <h6 style="color: white;">Everyone in the world should have fast reliable affordable internet</h6>
@@ -39,6 +47,16 @@
         var day = document.getElementById("day");
         var week = document.getElementById("week");
         var month = document.getElementById("month");
+
+        let popup = document.getElementById("popup");
+
+        function openPopup() {
+            popup.classList.add("open-popup");
+        }
+        function closePopup() {
+            popup.classList.remove("open-popup");
+        }
+
         day.onclick = function() {
             output.innerHTML = "1 day of Internet 384 VC"
             slider.value = 0;
